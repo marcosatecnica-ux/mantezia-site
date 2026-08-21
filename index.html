@@ -1,0 +1,651 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>Mantezia | Gestão de Assistência Técnica em Campo</title>
+
+  <meta
+    name="description"
+    content="Mantezia é uma plataforma em desenvolvimento para gestão de assistência técnica, ordens de serviço, técnicos em campo, atendimento ao cliente e conhecimento técnico."
+  />
+
+  <meta
+    name="keywords"
+    content="gestão de assistência técnica, software para assistência técnica, ordem de serviço, técnicos em campo, manutenção em campo, gestão de chamados técnicos, atendimento técnico externo, Mantezia"
+  />
+
+  <meta name="robots" content="index,follow" />
+
+  <meta property="og:title" content="Mantezia | Gestão de Assistência Técnica em Campo" />
+  <meta
+    property="og:description"
+    content="Tecnologia para organizar chamados, técnicos, clientes e conhecimento técnico."
+  />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://mantezia.com.br/" />
+
+  <link rel="icon" href="mantezia_logo_oficial.png" />
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      font-family: Arial, Helvetica, sans-serif;
+      background: #f4f7f8;
+      color: #142331;
+      line-height: 1.6;
+    }
+
+    header {
+      background: #071b2d;
+      color: white;
+      padding: 18px 24px;
+      position: sticky;
+      top: 0;
+      z-index: 10;
+    }
+
+    .nav {
+      max-width: 1180px;
+      margin: auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-weight: 800;
+      font-size: 22px;
+    }
+
+    .brand img {
+      width: 48px;
+      height: 48px;
+      object-fit: contain;
+      border-radius: 10px;
+    }
+
+    nav a {
+      color: #dbe9ec;
+      text-decoration: none;
+      margin-left: 20px;
+      font-size: 14px;
+      font-weight: 700;
+    }
+
+    .hero {
+      background:
+        linear-gradient(135deg, #071b2d 0%, #0b5d63 100%);
+      color: white;
+      padding: 100px 24px 110px;
+    }
+
+    .hero-inner {
+      max-width: 1180px;
+      margin: auto;
+      display: grid;
+      grid-template-columns: 1.3fr 0.7fr;
+      gap: 60px;
+      align-items: center;
+    }
+
+    .hero h1 {
+      font-size: clamp(42px, 7vw, 72px);
+      line-height: 1.05;
+      margin: 0 0 24px;
+    }
+
+    .hero h1 span {
+      color: #69e6bb;
+    }
+
+    .hero p {
+      max-width: 700px;
+      font-size: 20px;
+      color: #dceff0;
+    }
+
+    .hero-logo {
+      display: flex;
+      justify-content: center;
+    }
+
+    .hero-logo img {
+      width: min(340px, 80vw);
+      border-radius: 36px;
+    }
+
+    .actions {
+      margin-top: 32px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .button {
+      display: inline-block;
+      padding: 14px 22px;
+      border-radius: 12px;
+      text-decoration: none;
+      font-weight: 800;
+    }
+
+    .button-primary {
+      background: #69e6bb;
+      color: #071b2d;
+    }
+
+    .button-secondary {
+      border: 1px solid rgba(255,255,255,.35);
+      color: white;
+    }
+
+    section {
+      padding: 80px 24px;
+    }
+
+    .container {
+      max-width: 1180px;
+      margin: auto;
+    }
+
+    .section-title {
+      max-width: 760px;
+      margin-bottom: 42px;
+    }
+
+    .section-title h2 {
+      font-size: 38px;
+      line-height: 1.15;
+      margin: 0 0 12px;
+    }
+
+    .section-title p {
+      color: #61717b;
+      font-size: 18px;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+
+    .card {
+      background: white;
+      border: 1px solid #dfe8eb;
+      border-radius: 20px;
+      padding: 28px;
+    }
+
+    .card h3 {
+      margin-top: 0;
+      color: #0b5d63;
+    }
+
+    .dark {
+      background: #071b2d;
+      color: white;
+    }
+
+    .dark .section-title p {
+      color: #bdd2d7;
+    }
+
+    .steps {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 18px;
+    }
+
+    .step {
+      border-left: 4px solid #69e6bb;
+      padding: 4px 0 4px 18px;
+    }
+
+    .step strong {
+      display: block;
+      font-size: 18px;
+      margin-bottom: 8px;
+    }
+
+    .status {
+      background: #e9fff7;
+      border: 1px solid #a8e9d2;
+      color: #124d3d;
+      border-radius: 18px;
+      padding: 24px;
+      margin-top: 30px;
+    }
+
+    .contact {
+      text-align: center;
+    }
+
+    .contact-box {
+      max-width: 780px;
+      margin: auto;
+      background: white;
+      border-radius: 24px;
+      padding: 44px 28px;
+      border: 1px solid #dfe8eb;
+    }
+
+    .contact a {
+      color: #0b5d63;
+      font-size: 22px;
+      font-weight: 800;
+    }
+
+    footer {
+      background: #061522;
+      color: #9fb3bd;
+      text-align: center;
+      padding: 32px 20px;
+      font-size: 13px;
+    }
+
+    /* MANTEZIA_MISSAO_VISAO_VALORES */
+
+    .essencia {
+      background: #edf5f3;
+    }
+
+    .essencia-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 22px;
+    }
+
+    .essencia-card {
+      background: white;
+      border: 1px solid #dce8e5;
+      border-radius: 22px;
+      padding: 32px;
+    }
+
+    .essencia-card h3 {
+      margin: 0 0 14px;
+      color: #0b5d63;
+      font-size: 25px;
+    }
+
+    .essencia-card p {
+      margin: 0;
+      color: #51636d;
+      font-size: 17px;
+    }
+
+    .valores-card {
+      grid-column: 1 / -1;
+    }
+
+    .valores {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 18px;
+    }
+
+    .valor {
+      background: #e9fff7;
+      border: 1px solid #a8e9d2;
+      color: #124d3d;
+      border-radius: 999px;
+      padding: 10px 16px;
+      font-weight: 800;
+      font-size: 14px;
+    }
+
+    .frase-mantezia {
+      margin-top: 30px;
+      background: #071b2d;
+      color: white;
+      border-radius: 22px;
+      padding: 30px;
+      text-align: center;
+      font-size: clamp(24px, 4vw, 36px);
+      line-height: 1.25;
+      font-weight: 800;
+    }
+
+    .frase-mantezia span {
+      color: #69e6bb;
+    }
+    @media (max-width: 800px) {
+      .hero-inner,
+      .grid,
+      .steps,
+      .essencia-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .valores-card {
+        grid-column: auto;
+      }
+
+      .hero {
+        padding-top: 70px;
+      }
+
+      .hero-logo {
+        margin-top: 20px;
+      }
+
+      nav {
+        display: none;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+<header>
+  <div class="nav">
+
+    <div class="brand">
+      <img src="mantezia_logo_oficial.png" alt="Logo Mantezia" />
+      Mantezia
+    </div>
+
+    <nav>
+      <a href="#conceito">Conceito</a>
+      <a href="#como-funciona">Como funciona</a>
+      <a href="#essencia">Nossa essência</a>
+      <a href="#para-quem">Para quem</a>
+      <a href="#contato">Contato</a>
+    </nav>
+
+  </div>
+</header>
+
+<main>
+
+  <section class="hero">
+    <div class="hero-inner">
+
+      <div>
+        <h1>
+          Conhecimento técnico que
+          <span>continua na empresa.</span>
+        </h1>
+
+        <p>
+          A Mantezia está sendo desenvolvida para organizar a operação
+          de empresas de assistência técnica em campo, conectando
+          chamados, clientes, técnicos e conhecimento em uma única
+          plataforma.
+        </p>
+
+        <div class="actions">
+          <a href="#conceito" class="button button-primary">
+            Conheça o conceito
+          </a>
+
+          <a href="#contato" class="button button-secondary">
+            Entre em contato
+          </a>
+        </div>
+      </div>
+
+      <div class="hero-logo">
+        <img
+          src="mantezia_logo_oficial.png"
+          alt="Identidade visual da Mantezia"
+        />
+      </div>
+
+    </div>
+  </section>
+
+  <section id="conceito">
+    <div class="container">
+
+      <div class="section-title">
+        <h2>
+          Assistência técnica organizada do chamado ao conhecimento.
+        </h2>
+
+        <p>
+          A proposta da Mantezia é transformar informações espalhadas
+          em papel, mensagens e memória dos profissionais em uma
+          operação estruturada e documentada.
+        </p>
+      </div>
+
+      <div class="grid">
+
+        <article class="card">
+          <h3>Operação em campo</h3>
+          <p>
+            Organização de chamados, distribuição de técnicos,
+            acompanhamento do atendimento e registro das etapas
+            executadas em campo.
+          </p>
+        </article>
+
+        <article class="card">
+          <h3>Portal do cliente</h3>
+          <p>
+            Um ambiente para solicitar atendimento, acompanhar
+            chamados e consultar informações relacionadas aos
+            serviços executados.
+          </p>
+        </article>
+
+        <article class="card">
+          <h3>Conhecimento técnico</h3>
+          <p>
+            Diagnósticos, soluções e históricos deixam de depender
+            apenas da memória individual e passam a formar uma base
+            técnica organizada.
+          </p>
+        </article>
+
+      </div>
+
+    </div>
+  </section>
+
+  <section id="como-funciona" class="dark">
+    <div class="container">
+
+      <div class="section-title">
+        <h2>Como a Mantezia funciona</h2>
+
+        <p>
+          Uma jornada integrada entre cliente, operação e técnico.
+        </p>
+      </div>
+
+      <div class="steps">
+
+        <div class="step">
+          <strong>1. Chamado</strong>
+          O cliente ou a equipe operacional registra a necessidade
+          de atendimento.
+        </div>
+
+        <div class="step">
+          <strong>2. Distribuição</strong>
+          O atendimento é direcionado ao profissional disponível
+          conforme a operação.
+        </div>
+
+        <div class="step">
+          <strong>3. Atendimento</strong>
+          O técnico registra diagnóstico, serviço, materiais e
+          evidências do trabalho.
+        </div>
+
+        <div class="step">
+          <strong>4. Histórico</strong>
+          As informações permanecem disponíveis para acompanhamento
+          e aprendizado técnico futuro.
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- MANTEZIA_MISSAO_VISAO_VALORES -->
+  <section id="essencia" class="essencia">
+    <div class="container">
+
+      <div class="section-title">
+        <h2>Nossa essência</h2>
+
+        <p>
+          Os princípios que orientam a forma como a Mantezia
+          é construída, evolui e se relaciona com as pessoas.
+        </p>
+      </div>
+
+      <div class="essencia-grid">
+
+        <article class="essencia-card">
+          <h3>Missão</h3>
+
+          <p>
+            Preservar o conhecimento construído pelas pessoas e
+            transformar a experiência adquirida no trabalho em
+            inteligência organizacional, tornando empresas mais
+            preparadas, seguras e capazes de aprender continuamente.
+          </p>
+        </article>
+
+        <article class="essencia-card">
+          <h3>Visão</h3>
+
+          <p>
+            Ser uma plataforma de referência para organizações que
+            aprendem com a própria história, transformando cada
+            atendimento, decisão e experiência de campo em conhecimento
+            capaz de preparar a empresa para os desafios do futuro.
+          </p>
+        </article>
+
+        <article class="essencia-card valores-card">
+          <h3>Valores</h3>
+
+          <div class="valores">
+            <span class="valor">Pessoas em primeiro lugar</span>
+            <span class="valor">Conhecimento que permanece</span>
+            <span class="valor">Respeito a quem está em campo</span>
+            <span class="valor">Simplicidade com propósito</span>
+            <span class="valor">Segurança é inegociável</span>
+            <span class="valor">Confiança, ética e transparência</span>
+            <span class="valor">Evolução contínua sem perder a essência</span>
+          </div>
+        </article>
+
+      </div>
+
+      <div class="frase-mantezia">
+        Tecnologia é o meio.<br />
+        <span>Pessoas são o propósito.</span>
+      </div>
+
+    </div>
+  </section>
+  <section id="para-quem">
+    <div class="container">
+
+      <div class="section-title">
+        <h2>Para operações técnicas que acontecem fora da empresa.</h2>
+
+        <p>
+          A Mantezia foi concebida pensando em empresas que deslocam
+          profissionais para atender equipamentos, instalações ou
+          estruturas no local do cliente.
+        </p>
+      </div>
+
+      <div class="grid">
+
+        <article class="card">
+          <h3>Assistência técnica</h3>
+          <p>
+            Empresas responsáveis por manutenção e reparo de
+            equipamentos em campo.
+          </p>
+        </article>
+
+        <article class="card">
+          <h3>Manutenção</h3>
+          <p>
+            Operações de manutenção elétrica, mecânica,
+            eletroeletrônica, predial e industrial.
+          </p>
+        </article>
+
+        <article class="card">
+          <h3>Serviços técnicos</h3>
+          <p>
+            Equipes externas que precisam organizar deslocamentos,
+            chamados, registros e conhecimento técnico.
+          </p>
+        </article>
+
+      </div>
+
+      <div class="status">
+        <strong>Mantezia em desenvolvimento e validação.</strong><br />
+        A plataforma está atualmente em fase de construção e testes
+        operacionais. Ainda não há comercialização automática pelo site.
+      </div>
+
+    </div>
+  </section>
+
+  <section id="contato" class="contact">
+    <div class="container">
+
+      <div class="contact-box">
+
+        <h2>Quer conhecer a Mantezia?</h2>
+
+        <p>
+          Para conversar sobre o projeto, acompanhar o desenvolvimento
+          ou manifestar interesse:
+        </p>
+
+        <p>
+          <a href="mailto:contato@mantezia.com.br">
+            contato@mantezia.com.br
+          </a>
+        </p>
+
+        <small>
+          O endereço eletrônico oficial está em processo de configuração.
+        </small>
+
+      </div>
+
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  © 2026 Mantezia · Plataforma em desenvolvimento e validação.
+</footer>
+
+</body>
+</html>
+
